@@ -1,0 +1,5 @@
+{
+    "terminal.integrated.shell.windows": "cmd.exe",
+    "code-builder.build.inputFilePath": "c:\\Users\\mshiv\\Documents\\Cp files\\sde-sheet\\input.txt",
+    "code-builder.build.outputFilePath": "c:\\Users\\mshiv\\Documents\\Cp files\\sde-sheet\\output.txt"
+}
