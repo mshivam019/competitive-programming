@@ -1,40 +1,31 @@
 import java.util.Scanner;
 
 public class stringCompression {
-    public int compress(char[] chars) {
-        int len = chars.length;
-        StringBuilder sb = new StringBuilder();
-        char curr = chars[0];
-        int count = 1;
-        int op = 1;
+    public int compress(char[] c) {
+        int l = c.length;
+        if (l == 1)
+            return 1;
 
-        outer: while (op < len) {
-            if (curr == chars[op]) {
-                op++;
-                count++;
-                continue outer;
-            } else {
-                sb.append(curr);
-                if (count > 1)
-                    sb.append(count);
+        int k = 0;
+        for (int i = 0; i < l; i++) {
+            int end = i + 1;
+            int n = 1;
+            c[k++] = c[i];
+            while (end < l && c[end] == c[i]) {
+                n++;
+                end++;
+            }
+            i = end - 1;
+            if (n > 1) {
 
-                if (op < len)
-                    curr = chars[op];
-                count = 0;
+                String s = n + "";
+                for (char e : s.toCharArray()) {
+                    c[k] = e;
+                    k++;
+                }
             }
         }
-
-        sb.append(curr);
-        if (count > 1)
-            sb.append(count);
-
-        int lo = sb.length(), idx = 0;
-
-        for (; idx < lo; idx++) {
-            chars[idx] = sb.charAt(idx);
-        }
-
-        return idx;
+        return k;
     }
 
     public static void main(String[] args) {
