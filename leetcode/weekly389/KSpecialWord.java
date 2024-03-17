@@ -30,33 +30,37 @@
 
 // Explanation: We can make word 2-special by deleting 1 occurrence of "b". Therefore, word becomes equal to "aaaaaa" where each letter's frequency is now uniformly 6.
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class KSpecialWord {
     public static int minDeletionsToMakeKSpecial(String word, int k) {
-        int n = word.length();
-        int[] f = new int[26];
-        for(int i = 0;i < n;i++){
-            f[word.charAt(i) - 'a']++;
+        int arr[] = new int[26];
+        for (int i = 0; i < word.length(); i++) {
+            arr[word.charAt(i) - 'a']++;
         }
-        int ans = n;
-        for(int b = 1;b <= n;b++){
-            int o = 0;
-            for(int i = 0;i < 26;i++){
-                if(f[i] >= b && f[i] <= b+k){
-                }else if(f[i] > b+k) {
-                    o += f[i] - b - k;
-                }else{
-                    o += f[i];
+        Arrays.sort(arr);
+        int sum = 0;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < 26; i++) {
+            int x = arr[i] + k;
+            int minCurr = sum;
+            for (int j = i + 1; j < 26; j++) {
+                if (arr[j] > x) {
+                    minCurr += arr[j] - x;
                 }
             }
-            ans = Math.min(ans, o);
+            min = Math.min(minCurr, min);
+            sum += arr[i];
         }
-        return ans;
+        min = Math.min(sum, min);
+        return min;
     }
 
     public static void main(String[] args) {
-        String[] testWords = {"aabcaba", "dabdcbdcdcd", "aaabaaa"};
-        int[] testKs = {0, 2, 2};
+        String[] testWords = { "aabcaba", "dabdcbdcdcd", "aaabaaa" };
+        int[] testKs = { 0, 2, 2 };
 
         for (int i = 0; i < testWords.length; i++) {
             int deletions = minDeletionsToMakeKSpecial(testWords[i], testKs[i]);
