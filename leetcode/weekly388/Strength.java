@@ -31,7 +31,7 @@ public class Strength {
 		int n = a.length;
 		long[] dp = new long[n + 1];
 		for (int z = 0; z < k; z++) {
-			long v = k - z;
+			long v = (long) k - z;
 			if (z % 2 == 1)
 				v = -v;
 			long[] ndp = new long[n + 1];

@@ -9,7 +9,7 @@ public class HarshadNumber {
         }
         
         // Check if x is divisible by the sum of its digits
-        if (x % sum == 0) {
+        if (x != 0 && x % sum == 0) {
             return sum;
         } else {
             return -1;
